@@ -1,6 +1,6 @@
 pip3 install -e ".[model_worker,webui]"
 apt install libgl1-mesa-glx
-pip install flash-attn==2.5.0  --no-build-isolation
+# pip install flash-attn==2.5.0  --no-build-isolation
 pip install openai
 pip install -q mediapipe
 wget -O detector.tflite -q https://storage.googleapis.com/mediapipe-models/language_detector/language_detector/float32/latest/language_detector.tflite -P ./fastchat/llm_judge/data/mt_bench/model_judgment
