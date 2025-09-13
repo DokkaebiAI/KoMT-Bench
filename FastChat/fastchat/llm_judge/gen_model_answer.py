@@ -91,15 +91,16 @@ def get_model_answers(
 ):
     model, tokenizer = load_model(
         model_path,
-        revision=revision,
-        device="cuda",
-        num_gpus=num_gpus_per_model,
-        max_gpu_memory=max_gpu_memory,
-        dtype=dtype,
-        load_8bit=False,
-        cpu_offloading=False,
-        debug=False,
-        attn_implementation=attn_implementation,
+        from_pretrained_kwargs={
+            "revision": revision,
+            "torch_dtype": dtype,
+            "device_map": "auto",              # "cuda" 대신 자동 분배
+            "max_memory": max_gpu_memory,      # {0: "20GiB", 1: "20GiB"} 이런 dict 가능
+            "load_in_8bit": False,             # True 시 bitsandbytes 필요
+            "offload_folder": None,            # cpu_offloading=False 대체
+            "low_cpu_mem_usage": True,         # 메모리 효율 로딩
+            "attn_implementation": attn_implementation,
+        },
     )
 
     for question in tqdm(questions):
