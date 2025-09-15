@@ -114,7 +114,7 @@ def get_model_answers(
             conv = get_conversation_template(model_id)
             turns = []
             for j in range(len(question["turns"])):
-                qs = question["turns"][j] + "/no_think" if "qwen" in model_id.lower() else question["turns"][j]
+                qs = question["turns"][j] + "/no_think" if "qwen3" in model_id.lower() else question["turns"][j]
                 print(qs)
                 conv.append_message(conv.roles[0], qs)
                 conv.append_message(conv.roles[1], None)
